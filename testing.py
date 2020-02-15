@@ -1,17 +1,24 @@
 import tkinter as tk
-
-
-def qf(string):
-    print(string)
-
+import glob
+import os
+import sys
+# for nicer buttons
+from tkinter import ttk
 
 # inheriting from tk.TK
 class Window(tk.Tk):
+
     # arguments and keyword arguments
     # args is variables usually
     # kwargs are dictionaries usually
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+
+        # to load window image
+        img = tk.PhotoImage(file="icon.gif")
+        self.tk.call('wm', 'iconphoto', self._w, img)
+        # set title of window
+        tk.Tk.wm_title(self, "Vern's Adventure")
         # container that we populate with things
         container = tk.Frame(self)
         # packed to top, filled fill the space allocated by pack, expand fill all white space
@@ -47,12 +54,12 @@ class StartPage(tk.Frame):
         label.pack(pady=10, padx=10)
 
         # makes a button that does something
-        button_one = tk.Button(self, text="go page one",
+        button_one = ttk.Button(self, text="go page one",
                                command=lambda: controller.show_frame(PageOne))
         button_one.pack()
 
         # makes a button that does something
-        button_two = tk.Button(self, text="go page two",
+        button_two = ttk.Button(self, text="go page two",
                                command=lambda: controller.show_frame(PageTwo))
         button_two.pack()
 
@@ -65,12 +72,12 @@ class PageOne(tk.Frame):
         label.pack(pady=10, padx=10)
 
         # makes a button that does something
-        button_one = tk.Button(self, text="go start page",
+        button_one = ttk.Button(self, text="go start page",
                                command=lambda: controller.show_frame(StartPage))
         button_one.pack()
 
         # makes a button that does something
-        button_two = tk.Button(self, text="go page two",
+        button_two = ttk.Button(self, text="go page two",
                                command=lambda: controller.show_frame(PageTwo))
         button_two.pack()
 
@@ -83,12 +90,12 @@ class PageTwo(tk.Frame):
         label.pack(pady=10, padx=10)
 
         # makes a button that does something
-        button_one = tk.Button(self, text="go start page",
+        button_one = ttk.Button(self, text="go start page",
                                command=lambda: controller.show_frame(StartPage))
         button_one.pack()
 
         # makes a button that does something
-        button_two = tk.Button(self, text="go page one",
+        button_two = ttk.Button(self, text="go page one",
                                command=lambda: controller.show_frame(PageOne))
         button_two.pack()
 
