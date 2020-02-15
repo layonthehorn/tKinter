@@ -48,6 +48,7 @@ class Window(tk.Tk):
         frame.tkraise()
 
 
+# starting page
 class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -66,6 +67,7 @@ class StartPage(tk.Frame):
         button_two.pack()
 
 
+# page one
 class PageOne(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -84,6 +86,7 @@ class PageOne(tk.Frame):
         button_two.pack()
 
 
+# second page
 class PageTwo(tk.Frame):
 
     def __init__(self, parent, controller):
