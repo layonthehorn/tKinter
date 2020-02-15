@@ -1,5 +1,7 @@
 import tkinter as tk
 
+def qf(string):
+    print(string)
 
 # inheriting from tk.TK
 class Window(tk.Tk):
@@ -40,6 +42,11 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text='Start Page')
         label.pack(pady=10, padx=10)
+
+        # makes a button that does something
+        button_one = tk.Button(self, text="Go page one",
+                               command=lambda: qf("worked"))
+        button_one.pack()
 
 
 app = Window()
