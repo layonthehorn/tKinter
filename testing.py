@@ -1,7 +1,9 @@
 import tkinter as tk
 
+
 def qf(string):
     print(string)
+
 
 # inheriting from tk.TK
 class Window(tk.Tk):
@@ -20,14 +22,15 @@ class Window(tk.Tk):
         # dictionary of frames that we can switch between
         self.frames = {}
 
-        # starting page
-        frame = StartPage(container, self)
+        for F in (StartPage, PageOne, PageTwo):
+            # starting page
+            frame = F(container, self)
 
-        self.frames[StartPage] = frame
+            self.frames[F] = frame
 
-        # assigning row and column of grid.
-        # sticky to each side equally. stretches
-        frame.grid(row=0, column=0, sticky="nsew")
+            # assigning row and column of grid.
+            # sticky to each side equally. stretches
+            frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame(StartPage)
 
@@ -40,14 +43,56 @@ class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text='Start Page')
+        label = tk.Label(self, text='start page')
         label.pack(pady=10, padx=10)
 
         # makes a button that does something
-        button_one = tk.Button(self, text="Go page one",
-                               command=lambda: qf("worked"))
+        button_one = tk.Button(self, text="go page one",
+                               command=lambda: controller.show_frame(PageOne))
         button_one.pack()
 
+        # makes a button that does something
+        button_two = tk.Button(self, text="go page two",
+                               command=lambda: controller.show_frame(PageTwo))
+        button_two.pack()
 
-app = Window()
-app.mainloop()
+
+class PageOne(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text='page one')
+        label.pack(pady=10, padx=10)
+
+        # makes a button that does something
+        button_one = tk.Button(self, text="go start page",
+                               command=lambda: controller.show_frame(StartPage))
+        button_one.pack()
+
+        # makes a button that does something
+        button_two = tk.Button(self, text="go page two",
+                               command=lambda: controller.show_frame(PageTwo))
+        button_two.pack()
+
+
+class PageTwo(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text='page two')
+        label.pack(pady=10, padx=10)
+
+        # makes a button that does something
+        button_one = tk.Button(self, text="go start page",
+                               command=lambda: controller.show_frame(StartPage))
+        button_one.pack()
+
+        # makes a button that does something
+        button_two = tk.Button(self, text="go page one",
+                               command=lambda: controller.show_frame(PageOne))
+        button_two.pack()
+
+
+if __name__ == "__main__":
+    app = Window()
+    app.mainloop()
