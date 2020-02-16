@@ -1,7 +1,5 @@
 import tkinter as tk
-import glob
-import os
-import sys
+
 # for nicer buttons
 from tkinter import ttk
 
@@ -20,7 +18,7 @@ class Window(tk.Tk):
         self.tk.call('wm', 'iconphoto', self._w, img)
         # set title of window
         tk.Tk.wm_title(self, "Vern's Adventure")
-        self.geometry("400x400")
+        # self.geometry("400x400")
         # container that we populate with things
         container = tk.Frame(self)
         # packed to top, filled fill the space allocated by pack, expand fill all white space
@@ -53,18 +51,33 @@ class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text='start page')
-        label.pack(pady=10, padx=10)
+        # label = tk.Label(self, text='start page')
+        # label.grid(row=0)
+
+        # a place to enter text
+        label_one = tk.Label(self, text="Name")
+        label_one.grid(row=0, sticky="e")
+        label_two = tk.Label(self, text="Password")
+        label_two.grid(row=1, sticky="e")
+        entry_one = tk.Entry(self)
+        entry_one.grid(row=0, column=1)
+        entry_two = tk.Entry(self)
+        entry_two.grid(row=1, column=1)
+        check_box = tk.Checkbutton(self, text="keep me logged in.")
+        check_box.grid(columnspan=2)
 
         # makes a button that does something
         button_one = ttk.Button(self, text="go page one",
                                 command=lambda: controller.show_frame(PageOne))
-        button_one.pack()
+        button_one.grid(row=3, column=0)
 
         # makes a button that does something
         button_two = ttk.Button(self, text="go page two",
                                 command=lambda: controller.show_frame(PageTwo))
-        button_two.pack()
+        button_two.grid(row=3, column=2)
+
+    def left_click(self, event):
+        pass
 
 
 # page one
@@ -78,12 +91,12 @@ class PageOne(tk.Frame):
         # makes a button that does something
         button_one = ttk.Button(self, text="go start page",
                                 command=lambda: controller.show_frame(StartPage))
-        button_one.pack()
+        button_one.pack(side="left")
 
         # makes a button that does something
         button_two = ttk.Button(self, text="go page two",
                                 command=lambda: controller.show_frame(PageTwo))
-        button_two.pack()
+        button_two.pack(side="right")
 
 
 # second page
@@ -97,12 +110,12 @@ class PageTwo(tk.Frame):
         # makes a button that does something
         button_one = ttk.Button(self, text="go start page",
                                 command=lambda: controller.show_frame(StartPage))
-        button_one.pack()
+        button_one.pack(side="left")
 
         # makes a button that does something
         button_two = ttk.Button(self, text="go page one",
                                 command=lambda: controller.show_frame(PageOne))
-        button_two.pack()
+        button_two.pack(side="right")
 
 
 if __name__ == "__main__":
