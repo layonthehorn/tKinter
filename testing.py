@@ -99,6 +99,19 @@ class PageOne(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+
+        # making a canvas for the image
+        self.canvas = tk.Canvas(self, bg="black", height=894, width=894)
+        # must keep image around with self.
+        self.bg_picture = tk.PhotoImage(file="background.gif")
+
+        # making a label to hold image
+        bg_label = tk.Label(self, image=self.bg_picture)
+        # placing the label
+        bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+        # packing the canvas
+        self.canvas.pack()
+
         label = tk.Label(self, text='page one')
         label.pack(pady=10, padx=10)
 
