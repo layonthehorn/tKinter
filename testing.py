@@ -51,20 +51,24 @@ class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        # label = tk.Label(self, text='start page')
-        # label.grid(row=0)
+        # changeable text message in label
+        self.message = tk.StringVar()
+        self.message.set("")
+
+        # getting label message
+        self.label = tk.Label(self, text="")
+        self.label.grid(row=0, column=2)
 
         # a place to enter text
-        label_one = tk.Label(self, text="Name")
+        label_one = tk.Label(self, text="What should I do?")
         label_one.grid(row=0, sticky="e")
-        label_two = tk.Label(self, text="Password")
-        label_two.grid(row=1, sticky="e")
-        entry_one = tk.Entry(self)
-        entry_one.grid(row=0, column=1)
-        entry_two = tk.Entry(self)
-        entry_two.grid(row=1, column=1)
-        check_box = tk.Checkbutton(self, text="keep me logged in.")
-        check_box.grid(columnspan=2)
+
+        # place to take in data
+        self.entry_one = tk.Entry(self)
+        # allows pressing the enter key to get data
+        self.entry_one.bind("<Return>", self.get_text)
+        # places the entry location
+        self.entry_one.grid(row=0, column=1)
 
         # makes a button that does something
         button_one = ttk.Button(self, text="go page one",
@@ -76,8 +80,18 @@ class StartPage(tk.Frame):
                                 command=lambda: controller.show_frame(PageTwo))
         button_two.grid(row=3, column=2)
 
-    def left_click(self, event):
-        pass
+        button_two = ttk.Button(self, text="Enter Command",
+                                command=lambda: self.get_text())
+        button_two.grid(row=3, column=1)
+
+    # needs one parameter or will not work.
+    def get_text(self, event=0):
+        # gets info from box
+        self.message.set(self.entry_one.get())
+        # sets label to entry data
+        self.label.config(text=self.message.get())
+        # clears entry after data is taken in
+        self.entry_one.delete(0, 'end')
 
 
 # page one
